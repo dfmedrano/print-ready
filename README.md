@@ -118,27 +118,11 @@ Sketch exports RGB and this plugin doesn't change that, so the conversion happen
 
 **Acrobat Pro** — Tools → Print Production → Convert Colors. You choose the destination profile and keep control over how black is handled.
 
-**Ghostscript**, if you want it scripted. It isn't part of macOS, so install it first — `brew install ghostscript`, or the installer from [ghostscript.com](https://ghostscript.com/releases/gsdnld.html) if you'd rather not use Homebrew. Then:
-
-```bash
-gs -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -dColorConversionStrategy=/CMYK -dProcessColorModel=/DeviceCMYK -dPDFSETTINGS=/prepress -dAutoRotatePages=/None -sOutputFile=artwork-cmyk.pdf artwork.pdf
-```
-
-That gives you a true `DeviceCMYK` PDF with the vectors and the text still vectors, converted with Ghostscript's built-in CMYK profile.
-
-To convert against your printer's profile instead, pass it twice — once to permit the read, once to use it:
-
-```bash
-gs -dBATCH -dNOPAUSE -sDEVICE=pdfwrite --permit-file-read="/path/to/CoatedFOGRA39.icc" -sOutputICCProfile="/path/to/CoatedFOGRA39.icc" -dColorConversionStrategy=/CMYK -dProcessColorModel=/DeviceCMYK -dPDFSETTINGS=/prepress -dAutoRotatePages=/None -sOutputFile=artwork-cmyk.pdf artwork.pdf
-```
-
-`--permit-file-read` is not optional: Ghostscript sandboxes file access by default, and without it the profile fails to load with a `Permission denied` you may not notice, leaving you with the built-in conversion instead.
-
 A stock Mac only carries `/System/Library/ColorSync/Profiles/Generic CMYK Profile.icc`. Press profiles like Coated FOGRA39 or US Web Coated (SWOP) come with Adobe apps, in `/Library/Application Support/Adobe/Color/Profiles/Recommended/`, or as a free download from [ECI](https://www.eci.org).
 
 ### Two things to check in the result
 
-**Black.** A pure RGB black converts to a four-colour black — roughly 72/68/67/88, close to 300% ink. That's acceptable behind a large solid and wrong for body text, which wants black on the K plate alone so it stays sharp when the plates sit slightly out of register. Ghostscript's `-dBlackText` and `-dBlackVector` flags do not change this. If your artwork has black text, convert it in Acrobat or hand it to the printer.
+**Black.** A pure RGB black converts to a four-colour black — roughly 72/68/67/88, close to 300% ink. That's acceptable behind a large solid and wrong for body text, which wants black on the K plate alone so it stays sharp when the plates sit slightly out of register. If your artwork has black text, convert it in Acrobat or hand it to the printer.
 
 **Transparency.** Converting to CMYK composites transparency away. Printers generally want it flattened anyway, but check that blend modes and overlapping translucent shapes still look the way you meant.
 
