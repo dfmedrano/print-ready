@@ -1,0 +1,62 @@
+{
+  "name": "Print Ready",
+  "identifier": "com.dfmedrano.sketchplugins.print-ready",
+  "description": "Print production helpers: bleed-ready frames, a preflight check and press-ready exports.",
+  "author": "Jorge Medrano",
+  "homepage": "https://github.com/dfmedrano/print-ready",
+  "version": "1.0.0",
+  "appcast": false,
+  "compatibleVersion": "2026.1",
+  "bundleVersion": 1,
+  "commands": [
+    {
+      "name": "New Print Frame…",
+      "identifier": "newPrintFrame",
+      "script": "print-ready.js",
+      "handler": "newPrintFrame"
+    },
+    {
+      "name": "Add Bleed & Guides to Selection…",
+      "identifier": "addBleed",
+      "script": "print-ready.js",
+      "handler": "addBleed"
+    },
+    {
+      "name": "Preflight Check",
+      "identifier": "preflight",
+      "script": "print-ready.js",
+      "handler": "preflight"
+    },
+    {
+      "name": "Export for Print…",
+      "identifier": "exportForPrint",
+      "script": "print-ready.js",
+      "handler": "exportForPrint"
+    },
+    {
+      "name": "Show Physical Size",
+      "identifier": "showPhysicalSize",
+      "script": "print-ready.js",
+      "handler": "showPhysicalSize"
+    },
+    {
+      "name": "Toggle Print Guides",
+      "identifier": "toggleGuides",
+      "script": "print-ready.js",
+      "handler": "toggleGuides"
+    }
+  ],
+  "menu": {
+    "title": "Print Ready",
+    "items": [
+      "newPrintFrame",
+      "addBleed",
+      "-",
+      "preflight",
+      "exportForPrint",
+      "-",
+      "toggleGuides",
+      "showPhysicalSize"
+    ]
+  }
+}
