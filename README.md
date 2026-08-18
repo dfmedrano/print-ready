@@ -10,14 +10,6 @@ Built from [Sketch for Print Design](https://medium.com/sketch-tricks/sketch-for
 
 Requires **Sketch 2026.1 or newer**.
 
-To work on it instead, clone the repo and symlink the bundle so Sketch loads your edits:
-
-```bash
-ln -s "$PWD/Print Ready.sketchplugin" ~/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins/
-```
-
-No build step — the plugin is plain JavaScript against the public Sketch API.
-
 ## Commands
 
 ### New Print Frame…
