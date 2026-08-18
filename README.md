@@ -6,13 +6,17 @@ Built from [Sketch for Print Design](https://medium.com/sketch-tricks/sketch-for
 
 ## Install
 
-Download the latest release and double-click `Print Ready.sketchplugin`, or clone this repo and symlink it:
+- [**Download the plugin**](https://github.com/dfmedrano/print-ready/releases/latest/download/print-ready.sketchplugin.zip), then double-click `Print Ready.sketchplugin` to install it.
+
+Requires **Sketch 2026.1 or newer**.
+
+To work on it instead, clone the repo and symlink the bundle so Sketch loads your edits:
 
 ```bash
 ln -s "$PWD/Print Ready.sketchplugin" ~/Library/Application\ Support/com.bohemiancoding.sketch3/Plugins/
 ```
 
-Requires **Sketch 2026.1 or newer**. No build step — the plugin is plain JavaScript against the public Sketch API.
+No build step — the plugin is plain JavaScript against the public Sketch API.
 
 ## Commands
 
