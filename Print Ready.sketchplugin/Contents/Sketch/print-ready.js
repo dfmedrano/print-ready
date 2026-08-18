@@ -669,7 +669,12 @@ function profileLabel(name) {
 // switching back left an allocated colour space referenced by nothing, and the
 // collection that eventually reclaimed it took Sketch down. Reuse means there is
 // nothing to reclaim.
-const spaceCache = {}
+// Null prototype, like every lookup table here. The key is a file path, and on a
+// plain object `__proto__` is not a key at all — the write is ignored and the read
+// hands back Object.prototype, which is truthy. Nothing here is worth attacking,
+// but a table whose keys come from outside should not answer for entries it was
+// never given.
+const spaceCache = Object.create(null)
 
 function colorSpaceForProfile(path) {
   const key = String(path)
@@ -707,7 +712,7 @@ function cmykProfiles() {
   }
 
   const fileManager = NSFileManager.defaultManager()
-  const seen = {}
+  const seen = Object.create(null)
   const profiles = []
 
   try {
@@ -1861,13 +1866,13 @@ function preflightFrame(frame, profile, proofed) {
   const spec = specForFrame(frame)
   const boxes = boxesForFrame(frame, spec)
   const issues = []
-  const colorUsage = {}
+  const colorUsage = Object.create(null)
   const affected = []
 
   // Deduplicated by layer id, not by wrapper identity: the JS API hands out a
   // fresh wrapper object each time, so the same layer reached twice would
   // otherwise be selected twice.
-  const seen = {}
+  const seen = Object.create(null)
   const markAffected = (layer) => {
     // Not named `id`: CocoaScript reads a bare `id` as the Objective-C type and
     // rewrites the declaration to `const var`, which doesn't parse — so the whole
